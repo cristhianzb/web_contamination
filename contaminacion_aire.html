@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CONTAMINACION DEL AIRE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html">CONTAMINACION</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="index.html">HOME</a></li>
+          <li><a href="google_map.html">MAPAS</a></li>
+          <li><a href="contaminacion_aire.html">AIRE</a></li>
+          <li><a href="contaminacion_acustico.html">ACUSTICO</a></li>
+        </ul>
+      </div>
+    </nav>
+<div class="container">
+  <h2>FORMULARIO CONTAMINACION DEL AIRE</h2>
+  <form action="/mapa.html">
+    <div class="form-group">
+      <label for="email">INGRESE DATOS:</label>
+      <input type="email" class="form-control" id="email" placeholder="INGRESE LOS DATOS" name="email">
+    </div>
+    <div class="form-group">
+      <label for="pwd">CONTAMINACION</label>
+      <input type="password" class="form-control" id="pwd" placeholder="CONTAMINACION" name="pwd">
+    </div>
+
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="form-group">
+                <div class='input-group date' id='datetimepicker1'>
+                    <input type='text' class="form-control" placeholder="PRESIONE EL ICONO Y SELECCIONE UNA FECHA" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+    </div>
+     <div class="form-group">
+      <label for="pwd">PARTICIPANTE</label>
+      <input type="password" class="form-control" id="pwd" placeholder="PARTICIPANTE" name="pwd">
+    </div>
+
+
+    <div class="checkbox">
+      <label><input type="checkbox" name="remember"> Recordar datos</label>
+    </div>
+    <button type="submit" class="btn btn-default">ENVIAR</button>
+  </form>
+
+</div>
+
+
+</body>
+</html>
