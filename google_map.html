@@ -1,9 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+
     <title></title>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style type="text/css">
+
+  	#popup {
+  		visibility: hidden;
+  		opacity: 0;
+  		margin-top: -200px;
+  	}
+  	#popup:target {
+  		visibility:visible;
+  		opacity: 1;
+  		background-color: rgba(0,0,0,0.8);
+  		position: fixed;
+  		top:0;
+  		left:0;
+  		right:0;
+  		bottom:0;
+  		margin:0;
+  		z-index: 999;
+  		-webkit-transition:all 1s;
+  		-moz-transition:all 1s;
+  		transition:all 1s;
+  	}
+  	.popup-contenedor {
+  		position: relative;
+  		margin:7% auto;
+  		padding:30px 50px;
+  		background-color: #fafafa;
+  		color:#333;
+  		border-radius: 3px;
+  		width:50%;
+
+  	}
+  	a.popup-cerrar {
+  		position: absolute;
+  		top:3px;
+  		right:3px;
+  		background-color: #333;
+  		padding:7px 10px;
+  		font-size: 20px;
+  		text-decoration: none;
+  		line-height: 1;
+  		color:#fff;
+  	}
+
+      /* estilos para el enlace */
+
+  	a.popup-link {
+  	    text-align: center;
+  	    display: block;
+  	    margin: 30px 0;
+  	}
+
+  </style>
+
   </head>
   <body>
     <nav class="navbar navbar-default">
@@ -24,7 +80,44 @@
 
     <div id="map" style="width:100%;height:500px;">
 
+
     </div>
+
+<a href="#popup" class="popup-link">
+<input type="submit" class="btn btn-success btn-send" value="CONTAMINACION ACUSTICA"></a>
+
+<a href="#popup" class="popup-link">
+<input type="submit" class="btn btn-success btn-send" value="CONTAMINACION DEL AIRE"></a>
+<div class="modal-wrapper" id="popup">
+<div class="popup-contenedor">
+
+<h2>CONTAMINACION</h2>
+<p>Aqui se mostraria los graficos de la contaminacion acustica o Contaminación de CO2,
+    de un punto tomado en google maps y lo graficaria con la herramienta Charts.js con
+    los datos tomados de la base de datos y para ellos usaremos JSON.
+    <img src="resources/grafico.jpg"></img>
+    <script src="/resources/Chart.js"></script>
+  <div id="canvas-holder">
+
+  <canvas id="chart-area" width="300" height="300"></canvas>
+  </div>
+
+  <script>
+  var pieData = [{value:40,color:"#0b82e7",highlight: "#0c62ab",label: "Primer dato"},
+  {value:60,color:"#0b82e7",highlight: "#0c62ab",label: "Segundo dato"}];
+  var ctx = document.getElementById("chart-area").getContext("2d");
+  window.myPie = new Chart(ctx).Pie(pieData);
+  </script></p>
+
+<a class="popup-cerrar" href="#">X</a>
+
+</div>
+</div>
+
+
+
+
+
     <script type="text/javascript" src="funciones.js"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwA6afr8yptac2KN8N0w0AC4D8O_oLYU&callback=initMap" async defer></script>
   </body>
