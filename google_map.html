@@ -78,10 +78,26 @@
 
     <h1>Visualizacion de datos</h1>
 
-    <div id="map" style="width:100%;height:500px;">
+    <table>
+      <tr>
+        <td><div id="map" style="width:500px;height:500px;"></div></td>
+          <td>
+            <h2>tipo de contaminacion</h2>
+            <input type="radio" name="acustico" id="acustico" value="acustico">
+            <label for="acustico"> acustico</label>
+            <input type="radio" id="CO2">
+            <label for="CO2"> CO2</label>
+            <h3>tipo de visualizacion</h3>
+            <input type="radio" id="graficos">
+            <label for="graficos"> graficos</label>
+
+            <input type="radio" id="tablas">
+            <label for="tablas"> tablas</label>
+          </td>
+      </tr>
+    </table>
 
 
-    </div>
 
 <a href="#popup" class="popup-link">
 <input type="submit" class="btn btn-success btn-send" value="CONTAMINACION ACUSTICA"></a>
@@ -95,7 +111,7 @@
 <p>Aqui se mostraria los graficos de la contaminacion acustica o Contaminación de CO2,
     de un punto tomado en google maps y lo graficaria con la herramienta Charts.js con
     los datos tomados de la base de datos y para ellos usaremos JSON.
-    <img src="resources/grafico.jpg"></img>
+    <img src="resources/grafico.jpg" width="300px" height="150px"></img>
     <script src="/resources/Chart.js"></script>
   <div id="canvas-holder">
 
@@ -118,7 +134,74 @@
 
 
 
-    <script type="text/javascript" src="js/funciones.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzwA6afr8yptac2KN8N0w0AC4D8O_oLYU&callback=initMap" async defer></script>
+    <script type="text/javascript" src="funciones.js"></script>
+    <script>
+    function initMap(){
+      // Map options
+      var options = {
+        zoom:12,
+        center:{lat:-17.413977,lng:-66.165321}
+      }
+
+      //New map
+      var map = new google.maps.Map(document.getElementById('map'),options);
+
+      // Listen for click on map
+      google.maps.event.addListener(map, 'click', function(event){
+        //Add marker
+        addMarker({coords:event.latLng})
+      });
+      //Array of markers
+      var markers = [
+        {
+          coords:{lat:-17.413977,lng:-66.165321},
+          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content:'<h1>Mi ciudad :v</h1>'
+        },
+        {
+          coords:{lat:-17.401977,lng:-66.135000},
+          content:'<h1>GRAFICO >:v</h1><img src="resources/grafico.jpg" width="100px" height="100px">'
+        },
+        {
+          coords:{lat:-17.401977,lng:-66.165000}
+        }
+      ];
+
+      // loop through markers
+      for(i=0;i<markers.length;i++){
+        //Add marker
+        addMarker(markers[i]);
+      }
+
+      //Add Marker Function
+      function addMarker(props){
+        var marker = new google.maps.Marker({
+          position:props.coords,
+          map:map,
+          //icon:props.iconImage
+        });
+
+        //Check for custom icon
+        if(props.iconImage){
+          // Set icon image
+          marker.setIcon(props.iconImage);
+        }
+
+        //Check content
+        if(props.content){
+          var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
+        }
+      }
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
+    async defer></script>
   </body>
 </html>
+
