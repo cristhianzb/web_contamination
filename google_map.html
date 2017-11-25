@@ -61,21 +61,34 @@
 
   </style>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="index.html">CONTAMINACION</a>
+
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="index.html">CONTAMINACION</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="index.html">HOME</a></li>
+            <li><a href="google_map.html">MAPAS</a></li>
+            <li><a href="contaminacion_aire.html">AIRE</a></li>
+            <li><a href="contaminacion_acustico.html">ACUSTICO</a></li>
+          <li><a href="registro_contaminante.html">REGISTRO</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">REGISTRO
+           <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a href="#">Estacion</a></li>
+              <li><a href="#">Equipo</a></li>
+             <li><a href="registro_contaminante.html">Contaminante</a></li>
+            </ul>
+          </li>
+          </ul>
         </div>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="index.html">HOME</a></li>
-          <li><a href="google_map.html">MAPAS</a></li>
-          <li><a href="contaminacion_aire.html">AIRE</a></li>
-          <li><a href="contaminacion_acustico.html">ACUSTICO</a></li>
-        </ul>
-      </div>
-    </nav>
+      </nav>
 
     <h1>Visualizacion de datos</h1>
 
@@ -179,6 +192,7 @@
 
 
     <script type="text/javascript" src="funciones.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
     <script>
      google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -209,70 +223,8 @@
         var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
        
       }
-        
-    function initMap(){
-      // Map options
-      var options = {
-        zoom:12,
-        center:{lat:-17.413977,lng:-66.165321}
-      }
 
-      //New map
-      var map = new google.maps.Map(document.getElementById('map'),options);
-
-      // Listen for click on map
-      google.maps.event.addListener(map, 'click', function(event){
-        //Add marker
-        addMarker({coords:event.latLng})
-      });
-      //Array of markers
-      var markers = [
-        {
-          coords:{lat:-17.413977,lng:-66.165321},
-          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-          content: ' chart.draw(data, options);'
-        },
-        {
-          coords:{lat:-17.401977,lng:-66.135000},
-          content:' chart.draw(data1, options);'
-        },
-        {
-          coords:{lat:-17.401977,lng:-66.165000}
-        }
-      ];
-
-      // loop through markers
-      for(i=0;i<markers.length;i++){
-        //Add marker
-        addMarker(markers[i]);
-      }
-
-      //Add Marker Function
-      function addMarker(props){
-        var marker = new google.maps.Marker({
-          position:props.coords,
-          map:map,
-          //icon:props.iconImage
-        });
-
-        //Check for custom icon
-        if(props.iconImage){
-          // Set icon image
-          marker.setIcon(props.iconImage);
-        }
-
-        //Check content
-        if(props.content){
-          var infoWindow = new google.maps.InfoWindow({
-            content:props.content
-          });
-
-          marker.addListener('click', function(){
-            infoWindow.open(map, marker);
-          });
-        }
-      }
-    }
+      setUser(false);
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
