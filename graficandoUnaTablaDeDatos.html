@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery Shield UI Demos</title>
+    <link id="themecss" rel="stylesheet" type="text/css" href="https://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+    <script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+
+</head>
+<body class="theme-light">
+<div id="chart"></div>
+<script type="text/javascript">
+ 
+  /*  
+   var F0C0= document.getElementById("Tabla1").rows[0].cells[0].innerText;
+   var F1C0= document.getElementById("Tabla1").rows[1].cells[0].innerText;
+   var F2C0= document.getElementById("Tabla1").rows[2].cells[0].innerText;
+    var F3C0= document.getElementById("Tabla1").rows[3].cells[0].innerText;
+    var F4C0= document.getElementById("Tabla1").rows[4].cells[0].innerText;
+    var F5C0= document.getElementById("Tabla1").rows[5].cells[0].innerText;
+    var F6C0= document.getElementById("Tabla1").rows[6].cells[0].innerText;
+    var F7C0= document.getElementById("Tabla1").rows[7].cells[0].innerText;
+    var F8C0= document.getElementById("Tabla1").rows[8].cells[0].innerText;
+    var F9C0= document.getElementById("Tabla1").rows[9].cells[0].innerText;
+    var F10C0= document.getElementById("Tabla1").rows[10].cells[0].innerText;
+    var F11C0= document.getElementById("Tabla1").rows[11].cells[0].innerText;
+    var F12C0= document.getElementById("Tabla1").rows[12].cells[0].innerText;
+    var F13C0= document.getElementById("Tabla1").rows[13].cells[0].innerText;
+    var F14C0= document.getElementById("Tabla1").rows[14].cells[10].innerText;
+    */
+
+    $(document).ready(function () {
+
+
+
+        $("#chart").shieldChart({
+            theme: "light",
+            primaryHeader: {
+                text: "GRAFICA"
+            },
+            exportOptions: {
+                image: false,
+                print: false
+            },
+            axisX: {
+                categoricalValues: [document.getElementById("Tabla1").rows[0].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[1].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[2].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[3].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[4].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[5].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[6].cells[0].innerText, 
+                                    document.getElementById("Tabla1").rows[7].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[8].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[9].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[10].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[11].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[12].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[13].cells[0].innerText,
+                                    document.getElementById("Tabla1").rows[14].cells[0].innerText
+                                   ]
+            },
+            tooltipSettings: {
+                chartBound: true,
+                axisMarkers: {
+                    enabled: true,
+                    mode: 'xy'
+                }                    
+            },
+            //aqui es donde deberiamos poner los valores y se modificarian las graficas
+            dataSeries: [{
+                seriesType: 'area',
+                collectionAlias: "Grafica De Contaminación",
+                data: [100, 320, 453, 234, 553, 665, 345, 123, 432, 545, 654, 345, 332, 456, 234]
+            }]
+        });
+    });
+    
+   
+    
+    
+
+    function F0C0(){
+            var x= document.getElementById("Tabla1").rows[0].cells[0].innerText;
+            //alert(x);
+            
+        }
+        /*function F1C0(){
+            var x= document.getElementById("Tabla1").rows[1].cells[0].innerText;
+            //alert(x);
+        }
+        function F2C0(){
+            var x= document.getElementById("Tabla1").rows[2].cells[0].innerText;
+            //alert(x);
+            
+        }
+        function F3C0(){
+            var x= document.getElementById("Tabla1").rows[3].cells[0].innerText;
+           // alert(x);
+            
+        }
+       function F4C0(){
+            var x= document.getElementById("Tabla1").rows[4].cells[0].innerText;
+           // alert(x);
+            
+        }
+        function F5C0(){
+            var x= document.getElementById("Tabla1").rows[5].cells[0].innerText;
+            //alert(x);
+        }
+        function F6C0(){
+            var x= document.getElementById("Tabla1").rows[6].cells[0].innerText;
+            alert(x);
+            
+        }
+        function F7C0(){
+            var x= document.getElementById("Tabla1").rows[7].cells[0].innerText;
+           // alert(x);
+            
+        }
+
+        function F0C1(){
+            var x= document.getElementById("Tabla1").rows[0].cells[1].innerText;
+            alert(x);
+            
+        }
+        function F1C1(){
+            var x= document.getElementById("Tabla1").rows[1].cells[1].innerText;
+            alert(x);
+        }
+        function F2C1(){
+            var x= document.getElementById("Tabla1").rows[2].cells[1].innerText;
+            alert(x);
+            
+        }
+        function F3C1(){
+            var x= document.getElementById("Tabla1").rows[3].cells[1].innerText;
+            alert(x);
+            
+        }
+        function F4C1(){
+            var x= document.getElementById("Tabla1").rows[4].cells[1].innerText;
+            alert(x);
+            
+        }
+        function F5C1(){
+            var x= document.getElementById("Tabla1").rows[5].cells[1].innerText;
+            alert(x);
+        }
+        function F6C1(){
+            var x= document.getElementById("Tabla1").rows[6].cells[1].innerText;
+            alert(x);
+            
+        }
+        function F7C1(){
+            var x= document.getElementById("Tabla1").rows[7].cells[1].innerText;
+            alert(x);
+            
+        }*/
+
+        /*function mostrarOcultarTablas(Tabla1){
+             mostrado=0;
+                elem = document.getElementById(id);
+             if(elem.style.display==’block’)mostrado=1;
+             elem.style.display=’none’;
+             if(mostrado!=1)elem.style.display=’block’;
+        }*/
+
+
+        //F0C0= Fila 0 Columna 0
+        
+
+
+        //document.getElementById("Tabla1").rows[i].cells[j].innerText 
+        //document.getElementById("Tabla1").cells[j].innerText  
+        //document.getElementById("Tabla1").rows[0].cells[0].innerHTML = "<p>Algo de <b>HTML</b></p>"       
+    </script>
+        <table id="Tabla1" style="display: none">  
+ <tr><td>Tiempo 1</td><td>valor 1</td></tr>  
+ <tr><td>Tiempo 2</td><td>valor 2</td></tr>  
+ <tr><td>tiempo 3</td><td>valor 3</td></tr>  
+ <tr><td>tiempo 4</td><td>valor 4</td></tr> 
+ <tr><td>Tiempo 5</td><td>valor 5</td></tr>  
+ <tr><td>Tiempo 6</td><td>valor 6</td></tr>  
+ <tr><td>tiempo 7</td><td>valor 7</td></tr>  
+ <tr><td>tiempo 8</td><td>valor 8</td></tr> 
+ <tr><td>Tiempo 9</td><td>valor 9</td></tr>  
+ <tr><td>Tiempo 10</td><td>valor 10</td></tr>  
+ <tr><td>tiempo 11</td><td>valor 11</td></tr>  
+ <tr><td>tiempo 12</td><td>valor 12</td></tr> 
+ <tr><td>Tiempo 13</td><td>valor 13</td></tr>  
+ <tr><td>Tiempo 14</td><td>valor 14</td></tr>  
+ <tr><td>tiempo 15</td><td>valor 15</td></tr>   
+
+</table>  
+</body>
+</html>
