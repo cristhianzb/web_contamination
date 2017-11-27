@@ -48,97 +48,23 @@
             <input type="text" name="lng"  id="lng"> <br>
             <label for="date">Fecha:</label>
             <input id="fecha" name="fecha" type="date" onchange="console.log(document.getElementById('date').value);" value="2017-11-29"> <br>
-            <label for="usr">Nombre:</label>
-            <input type="text" name="usr" id="usr">
+            <label for="usr">Usuario:</label>
+            <input type="text"  name="usr"  id="usuario">
             <label for="pwd">Contrase&ntilde;a:</label>
             <input type="password" name="pwd" id="pwd"> 
-            <label for="contaminante">contaminante:</label>
-            <select id="contaminante" >
-              <option>Apple</option>
-            </select>
-            <input type="file" name="archivo" id="fileUpload">
-            <input type="submit" value="Agregar Registro">
+            <input type="submit" value="Agregar/Modificar">
+            <input type="submit" value="Eliminar">
           </form>
-            <input type="button" id="upload" value="MostrarTabla" onclick = "Upload()" />
-            <div id="dvCSV"></div>
       </div>
     </table>
     <script type="text/javascript" src="js/map.js"></script>
-
-
-	<script>
-function Upload() {
-    var fileUpload = document.getElementById("fileUpload");
-    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
-    if (regex.test(fileUpload.value.toLowerCase())) {
-        if (typeof (FileReader) != "undefined") {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var table = document.createElement("table");
-                var rows = e.target.result.split("\n");
-                for (var i = 0; i < rows.length; i++) {
-                    var row = table.insertRow(-1);
-                    rows[i]=rows[i];
-                    var cells = rows[i].split(",");
-                    for (var j = 0; j < cells.length; j++) {
-                        var cell = row.insertCell(-1);
-                        cell.innerHTML = cells[j];
-                    }
-                }
-                var dvCSV = document.getElementById("dvCSV");
-                dvCSV.innerHTML = "";
-                dvCSV.appendChild(table);
-            }
-            reader.readAsText(fileUpload.files[0]);
-        } else {
-            alert("Este navegador no admite HTML5.");
-        }
-    } else {
-        alert("Porfavor cargue un CSV válido >:v");
-    }
-}
-
-  </script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
   <script>
 
-    setUser(false);
+    setUser(true);
 
-    var contaminantes = ["CO2","CO","Decibeles"]
-    var box = document.getElementById("contaminante");
-    for(var i=0; i<contaminantes.length;i++){
-      var option = document.createElement("option");
-      option.text = contaminantes[i];
-      box.add(option);
-    }
-
-    var medicion = [];
-    document.getElementById("fileUpload").onchange = function(){
-
-      var file = this.files[0];
-
-      var reader = new FileReader();
-      reader.onload = function(progressEvent){
-        // Entire file
-        console.log(file.name);
-
-        // By lines
-        medicion = [];
-        var lines = this.result.split('\n');
-        for(var line = 0; line < lines.length; line++){
-          var data = lines[line].split(",");
-          if(data[0]!=null&&data[1]!=null){
-            if(data[0]!=""&&data[1]!=""){
-              medicion.push({hora:data[0],valor:data[1]});
-              console.log(medicion[medicion.length-1]);
-            }
-          }
-        }
-    };
-    reader.readAsText(file); 
-    };      
     function actualizar(){
       document.getElementById("lat").value = latitud;
       document.getElementById("lng").value = longitud;

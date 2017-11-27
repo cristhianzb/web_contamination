@@ -2,6 +2,7 @@
 var user=false;
 var latitud;
 var longitud;
+var miEstacion="123";
 function setUser(active){
   user=active;
 }
@@ -18,7 +19,7 @@ function initMap(){
       google.maps.event.addListener(map, 'click', function(event){
         //Add marker
         if(user)
-          addMarker({coords:event.latLng,content:"<h2>asd</h2>"});
+          addMarker({coords:event.latLng,title:"nueva estacion"});
         
       });
       //Array of markers
@@ -26,15 +27,18 @@ function initMap(){
         {
           coords:{lat:-17.413977,lng:-66.165321},
           iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          title:"estacion bandera"
         },
         {
           coords:{lat:-17.401977,lng:-66.135000},
-          content:' chart.draw(data1, options);'
+          title:"estacion ninja"
         },
         {
-          coords:{lat:-17.401977,lng:-66.165000}
+          coords:{lat:-17.401977,lng:-66.165000},
+          title:"estacion zeta"
         }
       ];
+
 
       // loop through markers
       for(i=0;i<markers.length;i++){
@@ -47,13 +51,15 @@ function initMap(){
         var marker = new google.maps.Marker({
           position:props.coords,
           map:map,
+          title:props.title
           //icon:props.iconImage
         });
         marker.addListener('click',function(){
             var pos = marker.position.toString().split(",");
             latitud = pos[0].substring(1,pos[0].length-1);
             longitud = pos[1].substring(1,pos[1].length-1);
-            console.log(latitud+" "+longitud);
+            miEstacion = marker.title;
+            console.log(miEstacion+" "+latitud+" "+longitud);
             actualizar();
         });
         //Check for custom icon
