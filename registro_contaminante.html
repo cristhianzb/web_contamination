@@ -44,6 +44,8 @@
       <tr>
         <td><div id="map" style="width:500px;height:500px;"></div></td>
           <td>
+            <h3 id="lat">0</h3>
+            <h3 id="lng">0</h3>
             <form>
             	
             </form>
@@ -56,5 +58,36 @@
   </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
+  <script>
+    var medicion = [];
+    document.getElementById('csv').onchange = function(){
+
+      var file = this.files[0];
+
+      var reader = new FileReader();
+      reader.onload = function(progressEvent){
+        // Entire file
+        console.log(file.name);
+
+        // By lines
+        medicion = [];
+        var lines = this.result.split('\n');
+        for(var line = 0; line < lines.length; line++){
+          var data = lines[line].split(",");
+          if(data[0]!=null&&data[1]!=null){
+            if(data[0]!=""&&data[1]!=""){
+              medicion.push({hora:data[0],valor:data[1]});
+              console.log(medicion[medicion.length-1]);
+            }
+          }
+        }
+    };
+    reader.readAsText(file); 
+    };      
+    function actualizar(){
+      document.getElementById("lat").innerHTML = latitud;
+      document.getElementById("lng").innerHTML = longitud;
+    }
+  </script>
 </body>
 </html>
