@@ -34,13 +34,13 @@
           </ul>
         </div>
       </nav>
-	<form action="procesar.php" method="">
-		<div id="div_file">
-			<p id="texto"> Add file
-			<input type="file" name="file" id="csv">
-		</div>
-	</form>
-	<table>
+  <input type="file" id="fileUpload" />
+<input type="button" id="upload" value="MostrarTabla" onclick = "Upload()" />
+<hr />
+<div id="dvCSV">
+</div>
+
+<table>
       <tr>
         <td><div id="map" style="width:500px;height:500px;"></div></td>
           <td>
@@ -53,14 +53,48 @@
       </tr>
     </table>
     <script type="text/javascript" src="js/map.js"></script>
+
+
 	<script>
-	setUser(true);
+function Upload() {
+    var fileUpload = document.getElementById("fileUpload");
+    var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
+    if (regex.test(fileUpload.value.toLowerCase())) {
+        if (typeof (FileReader) != "undefined") {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var table = document.createElement("table");
+                var rows = e.target.result.split("\n");
+                for (var i = 0; i < rows.length; i++) {
+                    var row = table.insertRow(-1);
+                    rows[i]=rows[i];
+                    var cells = rows[i].split(",");
+                    for (var j = 0; j < cells.length; j++) {
+                        var cell = row.insertCell(-1);
+                        cell.innerHTML = cells[j];
+                    }
+                }
+                var dvCSV = document.getElementById("dvCSV");
+                dvCSV.innerHTML = "";
+                dvCSV.appendChild(table);
+            }
+            reader.readAsText(fileUpload.files[0]);
+        } else {
+            alert("Este navegador no admite HTML5.");
+        }
+    } else {
+        alert("Porfavor cargue un CSV válido >:v");
+    }
+}
+
   </script>
+
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
   <script>
+    setUser(true);
     var medicion = [];
-    document.getElementById('csv').onchange = function(){
+    document.getElementById("fileUpload").onchange = function(){
 
       var file = this.files[0];
 
