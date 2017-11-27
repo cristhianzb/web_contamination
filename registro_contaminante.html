@@ -34,23 +34,31 @@
           </ul>
         </div>
       </nav>
-  <input type="file" id="fileUpload" />
-<input type="button" id="upload" value="MostrarTabla" onclick = "Upload()" />
-<hr />
-<div id="dvCSV">
-</div>
+  
 
 <table>
-      <tr>
-        <td><div id="map" style="width:500px;height:500px;"></div></td>
-          <td>
-            <h3 id="lat">0</h3>
-            <h3 id="lng">0</h3>
-            <form>
-            	
-            </form>
-          </td>
-      </tr>
+      <div class="row">
+        <div class="col-sm-6" style="width: 60%;"><div id="map" style="width:100%;height:500px;"></div></div>
+          <div class="col-sm-6" style="width: 40%;">
+            <h4 id="estacion"> nombre estacion </h4>
+            <div class="col-sm-2"> latitud: </div>
+            <div class="col-sm-4" id="lat">0</div>
+            <div class="col-sm-2"> longitud: </div>
+            <div class="col-sm-4" id="lng">0</div>
+            <input id="date" type="date" onchange="console.log(document.getElementById('date').value);" value="2017-11-29"> <br>
+            <label for="usr">Name:</label>
+            <input type="text"  id="usr">
+            <label for="pwd">Password:</label>
+            <input type="password"  id="pwd"> 
+            <label for="contaminante">contaminante:</label>
+            <select id="contaminante" >
+              <option>Apple</option>
+            </select>
+            <input type="file" id="fileUpload">
+            <input type="button" id="upload" value="MostrarTabla" onclick = "Upload()" />
+            <div id="dvCSV"></div>
+          </div>
+      </div>
     </table>
     <script type="text/javascript" src="js/map.js"></script>
 
@@ -92,7 +100,17 @@ function Upload() {
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
   <script>
+
     setUser(true);
+
+    var contaminantes = ["CO2","CO","Decibeles"]
+    var box = document.getElementById("contaminante");
+    for(var i=0; i<contaminantes.length;i++){
+      var option = document.createElement("option");
+      option.text = contaminantes[i];
+      box.add(option);
+    }
+
     var medicion = [];
     document.getElementById("fileUpload").onchange = function(){
 
