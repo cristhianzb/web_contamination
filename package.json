@@ -1,0 +1,23 @@
+{
+  "name": "web_contamination",
+  "version": "1.0.0",
+  "description": "trabajo para la materia de web, de un sistema de gestion de datos sobre contaminacion",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cristhianzb/web_contamination.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cristhianzb/web_contamination/issues"
+  },
+  "homepage": "https://github.com/cristhianzb/web_contamination#readme",
+  "dependencies": {
+    "express": "^4.16.2",
+    "pg": "^7.4.0"
+  }
+}

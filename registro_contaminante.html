@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/connection.js"></script>
   </head>
   <body>
 
@@ -51,7 +52,7 @@
             <label for="usr">Nombre:</label>
             <input type="text" name="usr" id="usr">
             <label for="pwd">Contrase&ntilde;a:</label>
-            <input type="password" name="pwd" id="pwd"> 
+            <input type="password" name="pwd" id="pwd">
             <label for="contaminante">contaminante:</label>
             <select id="contaminante" >
               <option></option>
@@ -106,8 +107,10 @@ function Upload() {
 
 
     setUser(false);
-
-    var contaminantes = ["CO2","CO","Ozono"]
+      prueba();
+    //inicioConexion();
+    //var contaminantes = getContaminantes();
+    //var contaminantes = ["CO2","CO","Ozono"]
     var box = document.getElementById("contaminante");
     for(var i=0; i<contaminantes.length;i++){
       var option = document.createElement("option");
@@ -138,8 +141,8 @@ function Upload() {
           }
         }
     };
-    reader.readAsText(file); 
-    };      
+    reader.readAsText(file);
+    };
     function actualizar(){
       document.getElementById("lat").value = latitud;
       document.getElementById("lng").value = longitud;
@@ -148,7 +151,7 @@ function Upload() {
 
   </script>
 
- 
+
    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
     async defer></script>
 
