@@ -1,10 +1,67 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+
     <title></title>
+    <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style type="text/css">
+
+  	#popup {
+  		visibility: hidden;
+  		opacity: 0;
+  		margin-top: -200px;
+  	}
+  	#popup:target {
+  		visibility:visible;
+  		opacity: 1;
+  		background-color: rgba(0,0,0,0.8);
+  		position: fixed;
+  		top:0;
+  		left:0;
+  		right:0;
+  		bottom:0;
+  		margin:0;
+  		z-index: 999;
+  		-webkit-transition:all 1s;
+  		-moz-transition:all 1s;
+  		transition:all 1s;
+  	}
+  	.popup-contenedor {
+  		position: relative;
+  		margin:7% auto;
+  		padding:30px 50px;
+  		background-color: #fafafa;
+  		color:#333;
+  		border-radius: 3px;
+  		width:50%;
+
+  	}
+  	a.popup-cerrar {
+  		position: absolute;
+  		top:3px;
+  		right:3px;
+  		background-color: #333;
+  		padding:7px 10px;
+  		font-size: 20px;
+  		text-decoration: none;
+  		line-height: 1;
+  		color:#fff;
+  	}
+
+      /* estilos para el enlace */
+
+  	a.popup-link {
+  	    text-align: center;
+  	    display: block;
+  	    margin: 30px 0;
+  	}
+
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -15,8 +72,7 @@
             <a class="navbar-brand" href="index.html">CONTAMINACION</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">HOME</a></li>
-            <li><a href="google_map.html">MAPAS</a></li>
+            <li><a href="index.html">HOME</a></li>
             <li><a href="contaminacion_aire.html">AIRE</a></li>
             <li><a href="contaminacion_acustico.html">ACUSTICO</a></li>
           <li><a href="registro_contaminante.html">REGISTRO</a></li>
@@ -30,22 +86,152 @@
             </ul>
           </li>
           </ul>
+           <ul class="nav navbar-nav navbar-right">
+              <li><a href="login.html">LOGIN</a></li>
+            </ul>
         </div>
       </nav>
-    <div class="container">
+
+    <h1>Visualizacion de datos</h1>
+
+    <table>
+      <tr>
+        <td><div id="map" style="width:500px;height:500px;"></div></td>
+          <td>
+            <h2>tipo de contaminacion</h2>
+            <input type="radio" name="acustico" id="acustico" value="acustico">
+            <label for="acustico"> acustico</label>
+            <input type="radio" id="CO2">
+            <label for="CO2"> CO2</label>
+            <h3>tipo de visualizacion</h3>
+            <input type="radio" id="graficos">
+            <label for="graficos"> graficos</label>
+
+            <input type="radio" id="tablas">
+            <label for="tablas"> tablas</label>
+          </td>
+      </tr>
+    </table>
 
 
-      <center>
-        <h1>Contaminacion en Cochabamba</h1>
-        <img src="resources/planta_nuclear.jpg" alt="planta nuclear">
-        
-        <p>
-          La Organización Mundial de la Salud (OMS) informa que en Latinoamérica, Cochabamba presenta valores de contaminación del aire superiores a los de las principales ciudades: Santiago de Chile, Lima y Sao Paulo.
-          En la ciudad el 80 por ciento de la contaminación es generada por el parque automotor y el 10 a 15 por ciento por las ladrilleras, según datos de la Dirección de Gestión Ambiental.
-        </p>
 
-      <center/>
+<a href="#popup" class="popup-link">
+<input type="submit" class="btn btn-success btn-send" value="CONTAMINACION ACUSTICA"></a>
 
-    </div>
+<a href="#popup" class="popup-link">
+<input type="submit" class="btn btn-success btn-send" value="CONTAMINACION DEL AIRE"></a>
+<div class="modal-wrapper" id="popup">
+<div class="popup-contenedor">
+
+<h2>CONTAMINACION</h2>
+<p>Aqui se mostraria los graficos de la contaminacion acustica o Contaminación de CO2,
+    de un punto tomado en google maps y lo graficaria con la herramienta Charts.js con
+    los datos tomados de la base de datos y para ellos usaremos JSON.
+     <script>
+     google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Fecha', 'C02', 'AIRE'],
+          ['2017-11-21',  1000,      400],
+          ['2017-11-20',  1170,      460],
+          ['2017-11-19',  660,       1120],
+          ['2017-11-18',  1030,      540]
+        ]);
+
+        var options = {
+          title: 'Contaminacion de CO2',
+          hAxis: {title: 'Fechas de Crecimiento del C02',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+
+        function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+          ['Fecha', 'C02', 'AIRE'],
+          ['2017-11-21',  1274,      598],
+          ['2017-11-20',  2456,      907],
+          ['2017-11-19',  234,       2463],
+          ['2017-11-18',  2345,      789]
+        ]);
+
+        var options = {
+          title: 'Contaminacion de CO2',
+          hAxis: {title: 'Fechas de Crecimiento del C02',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        //chart.draw(data, options);
+      }
+    </script>
+
+
+    <script src="/resources/Chart.js"></script>
+  <div id="canvas-holder">
+
+  <canvas id="chart-area" width="300" height="300"></canvas>
+  </div>
+
+  <script>
+  var pieData = [{value:40,color:"#0b82e7",highlight: "#0c62ab",label: "Primer dato"},
+  {value:60,color:"#0b82e7",highlight: "#0c62ab",label: "Segundo dato"}];
+  var ctx = document.getElementById("chart-area").getContext("2d");
+  window.myPie = new Chart(ctx).Pie(pieData);
+  </script></p>
+
+<a class="popup-cerrar" href="#">X</a>
+
+</div>
+</div>
+
+
+
+
+
+    <script type="text/javascript" src="funciones.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script>
+     google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Fecha', 'C02', 'AIRE'],
+          ['2017-11-21',  1000,      400],
+          ['2017-11-20',  1170,      460],
+          ['2017-11-19',  660,       1120],
+          ['2017-11-18',  1030,      540]
+        ]);
+        var data1 = google.visualization.arrayToDataTable([
+          ['Fecha', 'C02', 'AIRE'],
+          ['2017-11-21',  2,      1234],
+          ['2017-11-20',  1,      2345],
+          ['2017-11-19',  2,       345],
+          ['2017-11-18',  1,      1234],
+
+        ]);
+
+        var options = {
+          title: 'Contaminacion de CO2',
+          hAxis: {title: 'Fechas de Crecimiento del C02',  titleTextStyle: {color: '#333'}},
+          vAxis: {minValue: 0}
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+       
+      }
+
+      setUser(false);
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
+    async defer></script>
+     <div id="chart_div" style="width: 100%; height: 500px;"></div>
   </body>
+
 </html>
+
