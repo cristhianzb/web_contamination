@@ -54,7 +54,7 @@
             <input type="password" name="pwd" id="pwd"> 
             <label for="contaminante">contaminante:</label>
             <select id="contaminante" >
-              <option>Apple</option>
+              <option></option>
             </select>
             <input type="file" name="archivo" id="fileUpload">
             <input type="submit" value="Agregar Registro">
@@ -66,7 +66,13 @@
     <script type="text/javascript" src="js/map.js"></script>
 
 
+  <div id="dvCSV">
+</div>
+
+
 	<script>
+
+
 function Upload() {
     var fileUpload = document.getElementById("fileUpload");
     var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
@@ -98,15 +104,10 @@ function Upload() {
     }
 }
 
-  </script>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
-    async defer></script>
-  <script>
 
     setUser(false);
 
-    var contaminantes = ["CO2","CO","Decibeles"]
+    var contaminantes = ["CO2","CO","Ozono"]
     var box = document.getElementById("contaminante");
     for(var i=0; i<contaminantes.length;i++){
       var option = document.createElement("option");
@@ -144,6 +145,12 @@ function Upload() {
       document.getElementById("lng").value = longitud;
       document.getElementById("estacion").value = miEstacion;
     }
+
   </script>
+
+ 
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfzNBBWICnciBpjjwmzF3Up9cCFi18m0Y&callback=initMap"
+    async defer></script>
+
 </body>
 </html>
